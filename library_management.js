@@ -42,11 +42,43 @@ class Section {
     }
 
     getAvailableBooks() {
-        return this.books.filter(book => book._isAvailable === 'true').length; //will filter out books availability status to only include those that are true, and count them using .length.
+        return this.books.filter(book => book.isAvailable()).length; //will filter out books availability status to only include those that are true, and count them using .length.
     }
 
     listBooks() {
         return this.books;
     }
 
+}
+
+
+// Task 3: Create a Patron Class
+// This class will create a customer, with their name and the books they are currently borrowing. We will be able to create methods for them to successfully borrow and return books.
+
+class Patron {
+    constructor(name, borrowedBooks) {
+        this.name = name;
+        this.borrowedBooks = [];
+    }
+
+    borrowBook(book) {
+        if (!book.isAvailable) {
+            return (`This book is currently being borrowed by another patron.`)}
+        else {
+            book.isAvailable = false;
+            this.borrowedBooks.push(book);
+            return `${book.title} is now being borrowed by ${this.name}.`
+        }
+    }
+
+    returnBook(book) {
+        if (book.isAvailable) {
+            return "This book is currently not being borrowing. Please try a different book."
+        }
+        else {
+            book.isAvailable = true;
+            this.borrowedBooks = this.borrowedBooks.filter(book => book.title !== book.title);
+            return `${book.title} has now been returned by ${this.name}.`
+        }
+    }
 }
