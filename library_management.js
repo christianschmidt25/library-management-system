@@ -115,3 +115,31 @@ class VIPPatron extends Patron {
 // We will add a new method to the section class, calculating the total books in the section.
 
 // I have added this method into task 2, but it looks like the same function as getAvailableBooks. I have duplicated what is inside that method and added to our new one.
+
+
+// Task 6: Create and Manage Sections and Patrons
+// We are now adding variables into each class! Let's see if our methods work.
+
+const fiction = new Section("Fiction");
+const science = new Section("Science");
+
+const book1 = new Book("1984", "George Orwell", "1234567890");
+const book2 = new Book("Brave New World", "Aldous Huxley", "0987654321");
+const book3 = new Book("The Selfish Gene", "Richard Dawkins", "1122334455");
+
+fiction.addBook(book1);
+fiction.addBook(book2);
+science.addBook(book3);
+
+const regularPatron = new Patron("Jane Doe");
+const vipPatron = new VIPPatron("John Smith", true);
+
+regularPatron.borrowBook(book1);
+vipPatron.borrowBook(book1);
+
+regularPatron.returnBook(book1);
+
+fiction.listBooks();
+
+console.log(`Total available books in Fiction: ${fiction.getAvailableBooks()}`);
+console.log(`Total available books in Science: ${science.getAvailableBooks()}`);
