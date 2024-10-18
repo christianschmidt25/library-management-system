@@ -6,7 +6,7 @@ class Book {
         this.title = title;
         this.author = author;
         this.ISBN = ISBN;
-        this._isAvailable = true;
+        this._isAvailable = true; //having true here will make the default book status be available.
     }
 
     getDetails() {
@@ -18,7 +18,7 @@ class Book {
     }
 
     set isAvailable(status) {
-        if(typeof status === Boolean) {
+        if(typeof status === 'Boolean') { //shows that the status has to be Boolean (true or false)
             this._isAvailable = status; 
         }
         else {
@@ -26,3 +26,27 @@ class Book {
         }
     }
 };
+
+
+// Task 2: Create a Section Class
+// This class will divide books by genre, and be able to tell which books are in this category. We can also add books, see available books, and see all books with this class.
+
+class Section {
+    constructor(name, books) {
+        this.name = name;
+        this.books = [];
+    }
+
+    addBook(book) {
+        this.books.push(book); //adds book to the Book class
+    }
+
+    getAvailableBooks() {
+        return this.books.filter(book => book._isAvailable === 'true').length; //will filter out books availability status to only include those that are true, and count them using .length.
+    }
+
+    listBooks() {
+        return this.books;
+    }
+
+}
