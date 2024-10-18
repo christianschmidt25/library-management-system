@@ -42,11 +42,15 @@ class Section {
     }
 
     getAvailableBooks() {
-        return this.books.filter(book => book.isAvailable()).length; //will filter out books availability status to only include those that are true, and count them using .length.
+        return this.books.filter(book => book.isAvailable).length; //will filter out books availability status to only include those that are true, and count them using .length.
     }
 
     listBooks() {
         return this.books;
+    }
+    
+    calculateTotalBooksAvailable() {
+        return this.books.filter(book => book.isAvailable).length;
     }
 
 }
@@ -105,3 +109,9 @@ class VIPPatron extends Patron {
         }
     }
 }
+
+
+// Task 5: Handle Books Borrowing and Returning
+// We will add a new method to the section class, calculating the total books in the section.
+
+// I have added this method into task 2, but it looks like the same function as getAvailableBooks. I have duplicated what is inside that method and added to our new one.
