@@ -56,7 +56,7 @@ class Section {
 // This class will create a customer, with their name and the books they are currently borrowing. We will be able to create methods for them to successfully borrow and return books.
 
 class Patron {
-    constructor(name, borrowedBooks) {
+    constructor(name) {
         this.name = name;
         this.borrowedBooks = [];
     }
@@ -79,6 +79,29 @@ class Patron {
             book.isAvailable = true;
             this.borrowedBooks = this.borrowedBooks.filter(book => book.title !== book.title);
             return `${book.title} has now been returned by ${this.name}.`
+        }
+    }
+}
+
+
+// Task 4: Create a VIPPatron Class that inherits from Patron class
+// This class will be better than the regular patrons. We will allow our VIPs to have priority over regular patrons if both of them want to borrow th same book.
+
+class VIPPatron extends Patron {
+    constructor(name) {
+        super(name);
+        this.priority = true;
+    }
+
+    borrowBook(book, priority = true) {
+        if (!book.isAvailable && priority) {
+            return ("This book is currently unavailable, and a VIP patron has priority to borrow once it returns. Please try a different book.")
+        }
+        else if(!book.isAvailable) {
+            return ("This book is currently unavailable. Please try a different book.")
+        }
+        else {
+            return ("You are now borrowing this book.")
         }
     }
 }
