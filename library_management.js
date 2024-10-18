@@ -14,15 +14,15 @@ class Book {
     }
 
     get isAvailable() {
-        return this._isAvailable;
+        return this._isAvailable; // gives us book status
     }
 
     set isAvailable(status) {
         if(typeof status === 'Boolean') { //shows that the status has to be Boolean (true or false)
-            this._isAvailable = status; 
+            this._isAvailable = status; //updates book status
         }
         else {
-            console.log("Invalid. Please change availability status to true or false.")
+            return ("Invalid. Please change availability status to true or false.")
         }
     }
 };
@@ -46,7 +46,7 @@ class Section {
     }
 
     listBooks() {
-        return this.books;
+        return this.books; //returns list of all books
     }
     
     calculateTotalBooksAvailable() {
@@ -66,9 +66,9 @@ class Patron {
     }
 
     borrowBook(book) {
-        if (!book.isAvailable) {
+        if (!book.isAvailable) { //checks if book is NOT available
             return (`This book is currently being borrowed by another patron.`)}
-        else {
+        else { //if available, person is able to checkout book. changes status and adds this book to borrowed book list
             book.isAvailable = false;
             this.borrowedBooks.push(book);
             return `${book.title} is now being borrowed by ${this.name}.`
@@ -76,11 +76,11 @@ class Patron {
     }
 
     returnBook(book) {
-        if (book.isAvailable) {
+        if (book.isAvailable) { // checks to see if book is available (and therefore not being borrowed)
             return "This book is currently not being borrowing. Please try a different book."
         }
         else {
-            book.isAvailable = true;
+            book.isAvailable = true; // if book is being borrowed, it will now be returned and off the borrowed book list
             this.borrowedBooks = this.borrowedBooks.filter(book => book.title !== book.title);
             return `${book.title} has now been returned by ${this.name}.`
         }
@@ -98,7 +98,7 @@ class VIPPatron extends Patron {
     }
 
     borrowBook(book, priority = true) {
-        if (!book.isAvailable && priority) {
+        if (!book.isAvailable && priority) { //checks to see if there is priority now
             return ("This book is currently unavailable, and a VIP patron has priority to borrow once it returns. Please try a different book.")
         }
         else if(!book.isAvailable) {
